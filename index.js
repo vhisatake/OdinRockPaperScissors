@@ -11,7 +11,7 @@ function computerPlay() {
 
 
 
-function playAgainstComputer(playerSelection, computerSelection) {
+function round(playerSelection, computerSelection) {
     //Converting correct casing for playerSelection
     playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
     
@@ -33,6 +33,7 @@ function playAgainstComputer(playerSelection, computerSelection) {
     }
 }
 
+
 function game() {
     //initialize scores to 0
     let playerScore = 0;
@@ -41,22 +42,28 @@ function game() {
     //Playing 5 rounds
     for (let i = 0; i < 5; i++) {
         let playerSelection = prompt("Rock, paper, or scissors?");
+        let computerSelection = computerPlay();
+
+        console.log("You chose " + playerSelection + " and the computer chose " + computerSelection);
         /*if return starts with "You Win!" player gets a point, 
         else computer gets a point. If theres a tie no one does
         */
-        if (playAgainstComputer(playerSelection, computerPlay()).startsWith('You Win!')) {
+        if (round(playerSelection, computerSelection).startsWith('You Win!')) {
             console.log("You won round " + (i + 1))
             playerScore++;
-        } else if (playAgainstComputer(playerSelection, computerPlay()).startsWith('You Lose!')) {
+        } else if (round(playerSelection, computerSelection).startsWith('You Lose!')) {
             console.log("You lost round " + (i + 1));
             computerScore++;
-        }  else if (playAgainstComputer(playerSelection, computerPlay()).endsWith("it's a tie!")){
+        }  else if (round(playerSelection, computerSelection).endsWith("it's a tie!")){
             console.log("round " + (i + 1) + " is a tie!");
         }
+        console.log("\nScore:")
+        console.log("Player Score: " + playerScore);
+        console.log("Computer Score: " + computerScore + "\n\n");
+        
     }
     //displaying score
-    console.log("Player Score: " + playerScore);
-    console.log("Computer Score: " + computerScore);
+    
 
     //determine winner
     if (playerScore > computerScore) {
